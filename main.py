@@ -311,14 +311,8 @@ if __name__ == '__main__':
     csv_path = os.path.join(args.csv_dir, 'Fold_{}.csv'.format(args.fold))  # dir to save label
     if args.test:
         train_dataset, val_dataset, test_dataset = return_splits(csv_path=csv_path, test=True)
-        args.dataset = {'train': train_dataset, 'val': val_dataset, 'test': test_dataset}
-        train_eset, val_eset, test_eset = train_dataset.keys(), val_dataset.keys(), test_dataset.keys()
-        args.data_eset = {'train_eset': train_eset, 'val_eset': val_eset, 'test_eset': test_eset}
     else:
         train_dataset, val_dataset = return_splits(csv_path=csv_path, test=False)
-        args.dataset = {'train': train_dataset, 'val': val_dataset}
-        train_eset, val_eset = train_dataset.keys(), val_dataset.keys()
-        args.data_eset = {'train_eset': train_eset, 'val_eset': val_eset}
 
     feat_dir = args.feat_dir
     train_dset = MILDataset(train_dataset, feat_dir)
