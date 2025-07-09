@@ -280,12 +280,6 @@ def split_slide_data(split_num, model, model_path, loader, device, model_suffix=
                         ptopk_indices = search_indices[np.argsort(-shap)]
                         left_indices = attn_index[search_num:]
                         attn_index = ptopk_indices.tolist() + left_indices.tolist()
-                    elif metrics == 'cont':
-                        search_indices = attn_index[:search_num]
-                        cont = contribution(search_indices, feat, target, model, device, model_suffix)
-                        ptopk_indices = search_indices[np.argsort(-cont)]
-                        left_indices = attn_index[search_num:]
-                        attn_index = ptopk_indices.tolist() + left_indices.tolist()
                 split[slide_id[0]] = [attn_index[i::split_num] for i in range(split_num)]
                 pbar.update(1)
     return split
